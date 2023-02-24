@@ -1,3 +1,4 @@
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +15,12 @@ namespace Notes.Identity
 	{
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddIdentityServer()
+				.AddInMemoryApiResources(Configuration.ApiResources)
+				.AddInMemoryIdentityResources(Configuration.IdentityResources)
+				.AddInMemoryApiScopes(Configuration.ApiScopes)
+				.AddInMemoryClients(Configuration.Clients)
+				.AddDeveloperSigningCredential();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -24,6 +31,7 @@ namespace Notes.Identity
 			}
 
 			app.UseRouting();
+			app.UseIdentityServer();
 
 			app.UseEndpoints(endpoints =>
 			{
