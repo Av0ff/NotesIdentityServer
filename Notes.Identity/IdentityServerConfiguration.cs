@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Notes.Identity
 {
-	public static class Configuration
+	public static class IdentityServerConfiguration
 	{
 		public static IEnumerable<ApiScope> ApiScopes =>
 			new List<ApiScope>
@@ -19,7 +19,7 @@ namespace Notes.Identity
 			{
 				new ApiResource("NotesWebApi", "Web API", new [] { JwtClaimTypes.Name })
 				{
-					Scopes = {"Web API"},
+					Scopes = {"NotesWebApi"},
 				}
 			};
 
