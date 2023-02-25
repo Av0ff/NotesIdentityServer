@@ -54,6 +54,8 @@ namespace Notes.Identity
 				config.LoginPath = "/Auth/Login";
 				config.LogoutPath = "/Auth/Logout";
 			});
+
+			services.AddControllersWithViews();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -63,15 +65,13 @@ namespace Notes.Identity
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseIdentityServer();
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapGet("/", async context =>
-				{
-					await context.Response.WriteAsync("Hello World!");
-				});
+				endpoints.MapDefaultControllerRoute();
 			});
 		}
 	}
