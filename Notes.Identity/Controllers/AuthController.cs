@@ -48,7 +48,10 @@ namespace Notes.Identity.Controllers
 
 			if (result.Succeeded)
 			{
-				return Redirect(model.ReturnUrl);
+				if (model.ReturnUrl != null)
+					return Redirect(model.ReturnUrl);
+				else
+					return View(model);
 			}
 
 			ModelState.AddModelError(string.Empty, "Login Error");
@@ -82,7 +85,10 @@ namespace Notes.Identity.Controllers
 			if (result.Succeeded)
 			{
 				await _signInManager.SignInAsync(user, false);
-				return Redirect(model.ReturnUrl);
+				if (model.ReturnUrl != null)
+					return Redirect(model.ReturnUrl);
+				else
+					return View(model);
 			}
 			ModelState.AddModelError(string.Empty, "Error occurred");
 			return View(model);
