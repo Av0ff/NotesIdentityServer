@@ -17,9 +17,9 @@ namespace Notes.Identity
 		public static IEnumerable<ApiResource> ApiResources =>
 			new List<ApiResource>
 			{
-				new ApiResource("NotesWebApi", "Web API", new [] { JwtClaimTypes.Name })
+				new ApiResource("NotesWebApi", "Web API")
 				{
-					Scopes = {"NotesWebApi"},
+					Scopes = {"NotesWebApi"}
 				}
 			};
 
@@ -39,18 +39,17 @@ namespace Notes.Identity
 					ClientName = "Notes Web API",
 					AllowedGrantTypes = GrantTypes.Code,
 					RequireClientSecret = false,
-					RequirePkce = true,
 					RedirectUris =
 					{
-						"http://.../signin-oidc"
+						"https://localhost:5001/signin-oidc"
 					},
 					AllowedCorsOrigins =
 					{
-						"http://..."
+						"https://localhost:5001"
 					},
 					PostLogoutRedirectUris =
 					{
-						"http://.../singout-oidc"
+						"https://localhost:5001/singout-oidc"
 					},
 					AllowedScopes =
 					{

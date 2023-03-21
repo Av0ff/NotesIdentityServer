@@ -99,7 +99,10 @@ namespace Notes.Identity.Controllers
 		{
 			await _signInManager.SignOutAsync();
 			var logoutRequest = await _interaction.GetLogoutContextAsync(logoutId);
-			return Redirect(logoutRequest.PostLogoutRedirectUri);
+			if (logoutRequest.PostLogoutRedirectUri != null)
+				return Redirect(logoutRequest.PostLogoutRedirectUri);
+			else
+				return RedirectToAction("Login");
 		}
 	}
 }
